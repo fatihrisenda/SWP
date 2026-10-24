@@ -1,0 +1,22 @@
+{
+  "name": "studywork-planner",
+  "private": true,
+  "version": "1.0.0",
+  "engines": { "node": ">=22" },
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build -w packages/shared && npm run build -w apps/api && npm run build -w apps/web",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "prisma:migrate": "npm run prisma:migrate -w apps/api",
+    "prisma:seed": "npm run db:seed -w apps/api",
+    "prepare": "node -e \"try{require('husky')}catch(e){process.exit(0)}\" && husky || exit 0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "husky": "^9.1.7"
+  }
+}

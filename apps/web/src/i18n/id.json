@@ -1,0 +1,630 @@
+{
+  "app": {
+    "name": "StudyWork Planner"
+  },
+  "admin": {
+    "actions": "Aksi",
+    "add": "Tambah User",
+    "addTitle": "Tambah User Baru",
+    "cannotDeleteSelf": "Anda tidak dapat menghapus akun sendiri",
+    "createdAt": "Tanggal Registrasi",
+    "delete": {
+      "confirm": "Apakah Anda yakin ingin menghapus user ini? Semua data terkait (tugas, mood, kategori) akan ikut terhapus.",
+      "ok": "Ya, Hapus",
+      "title": "Hapus User"
+    },
+    "deleteFor": "Hapus {{name}}",
+    "editFor": "Edit {{name}}",
+    "editTitle": "Edit User",
+    "email": "Email",
+    "emailTaken": "Email sudah digunakan user lain",
+    "empty": "Belum ada user",
+    "lastSuperAdmin": "SuperAdmin terakhir tidak dapat dihapus atau diturunkan",
+    "list": "Daftar user",
+    "name": "Nama Lengkap",
+    "password": "Password",
+    "passwordKeepHint": "Kosongkan jika tidak diubah",
+    "passwordOptionalPlaceholder": "Minimal 8 karakter",
+    "role": "Role",
+    "search": "Cari user",
+    "searchPlaceholder": "Cari nama atau email",
+    "stats": {
+      "title": "Statistik user",
+      "total": "Total Users",
+      "mahasiswa": "Total Mahasiswa",
+      "superadmin": "Total SuperAdmin"
+    },
+    "subtitle": "Kelola semua user dalam sistem",
+    "userCreated": "User berhasil ditambahkan",
+    "userUpdated": "Perubahan user tersimpan",
+    "userDeleted": "User berhasil dihapus",
+    "you": "(Anda)"
+  },
+  "auth": {
+    "email": "Email",
+    "emailPlaceholder": "nama@email.com",
+    "errors": {
+      "emailInvalid": "Format email tidak valid",
+      "emailTaken": "Email sudah terdaftar",
+      "passwordMin": "Password minimal 8 karakter",
+      "passwordMismatch": "Konfirmasi password tidak sama"
+    },
+    "hidePassword": "Sembunyikan password",
+    "login": {
+      "button": "Masuk",
+      "invalid": "Email atau password tidak valid",
+      "noAccount": "Belum punya akun?",
+      "passwordPlaceholder": "Masukkan password",
+      "rateLimited": "Terlalu banyak percobaan. Coba lagi dalam {{minutes}} menit.",
+      "subtitle": "Masuk ke akun Anda",
+      "success": "Berhasil masuk",
+      "title": "Masuk"
+    },
+    "name": "Nama Lengkap",
+    "password": "Password",
+    "register": {
+      "button": "Daftar",
+      "confirmPassword": "Konfirmasi Password",
+      "hasAccount": "Sudah punya akun?",
+      "loginLink": "Masuk di sini",
+      "passwordPlaceholder": "Minimal 8 karakter",
+      "rateLimited": "Terlalu banyak percobaan. Coba lagi dalam {{minutes}} menit.",
+      "strength": {
+        "0": "Password terlalu pendek",
+        "1": "Kekuatan: lemah",
+        "2": "Kekuatan: cukup",
+        "3": "Kekuatan: baik"
+      },
+      "success": "Selamat datang di StudyWork Planner!",
+      "title": "Buat Akun Baru"
+    },
+    "remember": "Ingat Saya",
+    "showPassword": "Tampilkan password"
+  },
+  "categoryType": {
+    "KULIAH": "Kuliah",
+    "PRIBADI": "Pribadi"
+  },
+  "categories": {
+    "actions": "Aksi",
+    "actionsFor": "Aksi untuk {{name}}",
+    "add": "Tambah Kategori",
+    "addTitle": "Tambah Kategori",
+    "changeType": {
+      "body": "{{count}} tugas akan pindah ke halaman Tugas {{page}}.",
+      "title": "Ubah tipe kategori?"
+    },
+    "color": "Warna",
+    "colorCustom": "Warna kustom",
+    "colorHex": "Format warna harus #RRGGBB",
+    "created": "Kategori berhasil ditambahkan",
+    "delete": {
+      "confirm": "Apakah Anda yakin ingin menghapus kategori ini?",
+      "title": "Hapus Kategori"
+    },
+    "deleted": "Kategori berhasil dihapus",
+    "edit": "Edit",
+    "editTitle": "Edit Kategori",
+    "empty": "Belum ada kategori",
+    "emptyBody": "Tambahkan kategori agar tugas lebih terorganisir.",
+    "emptyHint": "Tambahkan kategori pertama untuk mulai.",
+    "emptyTitle": "Belum ada kategori",
+    "errors": {
+      "colorFormat": "Warna harus berformat #RRGGBB",
+      "nameTaken": "Nama kategori sudah digunakan"
+    },
+    "inUse": "Kategori masih dipakai tugas. Pindahkan tugas terlebih dahulu.",
+    "name": "Nama Kategori",
+    "namePlaceholder": "Contoh: UTS",
+    "palette": "Palet warna",
+    "pickColor": "Pilih warna {{color}}",
+    "reassign": {
+      "body": "{{name}} masih dipakai {{count}} tugas. Pilih kategori tujuan, lalu hapus.",
+      "none": "Belum ada kategori lain dengan tipe yang sama. Buat kategori baru lebih dulu.",
+      "pick": "Pindahkan tugas ke",
+      "title": "Kategori masih dipakai"
+    },
+    "saveFailed": "Gagal menyimpan kategori.",
+    "subtitle": "Kelola kategori untuk tugas Anda",
+    "type": "Tipe",
+    "updated": "Perubahan kategori tersimpan"
+  },
+  "common": {
+    "cancel": "Batal",
+    "close": "Tutup",
+    "confirm": "OK",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "leave": "Tinggalkan",
+    "loadMore": "Muat lebih banyak ({{shown}} dari {{total}})",
+    "loading": "Memuat…",
+    "logout": "Keluar",
+    "refresh": "Perbarui",
+    "retry": "Coba lagi",
+    "save": "Simpan",
+    "saveChanges": "Simpan Perubahan"
+  },
+  "conflicts": {
+    "adjust": "Atur Ulang Jadwal",
+    "collides": "Bentrok dengan \"{{title}}\" ({{time}}).",
+    "deleteLow": "Hapus tugas \"{{title}}\" ({{label}})",
+    "listLabel": "Daftar konflik jadwal",
+    "maxRechecks": "Jadwal saran sudah dipakai 3 kali berturut-turut. Atur waktu secara manual.",
+    "overload": "Beban {{day}}: {{hours}} jam — melebihi kapasitas harian Anda.",
+    "saveAnyway": "Tetap Simpan",
+    "tightGap": "Jeda dengan \"{{title}}\" hanya {{minutes}} menit (disarankan ≥ 30 menit).",
+    "title": "Konflik Jadwal Terdeteksi",
+    "useSuggestion": "Pakai jadwal saran: {{time}}"
+  },
+  "dash": {
+    "all": {
+      "title": "Semua Tugas"
+    },
+    "analytics": {
+      "done": "Tugas Selesai",
+      "doneHint": "Status selesai",
+      "highPriority": "Prioritas Tinggi",
+      "highPriorityHint": "TOP dan HIGH",
+      "title": "Ringkasan tugas",
+      "total": "Total Tugas",
+      "totalHours": "Total Waktu Pengerjaan",
+      "totalHoursHint": "Akumulasi estimasi durasi"
+    },
+    "dueSoon": "{{count}} tugas jatuh tempo / dimulai dalam 24 jam ke depan.",
+    "filter": {
+      "category": "Kategori"
+    },
+    "greeting": {
+      "morning": "Selamat pagi",
+      "afternoon": "Selamat siang",
+      "evening": "Selamat sore",
+      "night": "Selamat malam"
+    },
+    "mood": {
+      "hint": "Pilih mood hari ini untuk mendapatkan rekomendasi yang sesuai.",
+      "noPick": "Belum ada rekomendasi. Isi mood untuk melihat saran.",
+      "openAi": "Lihat rekomendasi",
+      "question": "Bagaimana perasaanmu hari ini?",
+      "saved": "Mood tersimpan",
+      "today": "Mood hari ini: {{label}}",
+      "topPick": "Rekomendasi utama: {{title}}"
+    },
+    "nearest": {
+      "empty": "Belum ada tugas yang akan datang.",
+      "title": "4 Tugas Terdekat"
+    },
+    "quick": {
+      "activeCount": "{{count}} aktif",
+      "title": "Akses Cepat"
+    }
+  },
+  "errors": {
+    "boundary": {
+      "body": "Terjadi kesalahan pada aplikasi. Muat ulang halaman untuk melanjutkan.",
+      "reload": "Muat ulang",
+      "title": "Terjadi kesalahan"
+    },
+    "conflictCheck": "Pengecekan konflik gagal. Periksa koneksi lalu coba lagi.",
+    "generic": "Terjadi kesalahan. Silakan coba lagi.",
+    "loadFailed": "Gagal memuat data.",
+    "network": "Tidak ada koneksi. Perubahan belum tersimpan."
+  },
+  "filter": {
+    "active": "Aktif",
+    "all": "Semua",
+    "done": "Selesai"
+  },
+  "form": {
+    "draftContinue": "Lanjutkan",
+    "draftDiscard": "Buang",
+    "draftFound": "Lanjutkan draf sebelumnya?",
+    "errors": {
+      "descriptionMax": "Deskripsi maksimal 1000 karakter",
+      "invalid": "Isian tidak valid",
+      "invalidDate": "Tanggal tidak valid",
+      "invalidTime": "Jam tidak valid",
+      "nameMax": "Nama maksimal 50 karakter",
+      "required": "Wajib diisi",
+      "titleMax": "Judul maksimal 100 karakter",
+      "titleRequired": "Judul wajib diisi",
+      "tooLong": "Terlalu panjang",
+      "tooShort": "Terlalu pendek"
+    },
+    "unsaved": "Perubahan yang belum disimpan akan hilang.",
+    "unsavedTitle": "Yakin ingin keluar?"
+  },
+  "install": {
+    "button": "Pasang Aplikasi",
+    "heading": "Pasang aplikasi",
+    "hint": "Pasang ke ponsel atau desktop agar bisa dibuka mandiri dan tetap tersedia saat offline.",
+    "installed": "Aplikasi terpasang",
+    "ios": {
+      "pushNote": "Notifikasi pengingat hanya berfungsi setelah aplikasi terpasang (iOS 16.4 ke atas).",
+      "step1": "Ketuk ikon Bagikan (kotak dengan panah ke atas).",
+      "step2": "Pilih \"Tambahkan ke Layar Utama\".",
+      "step3": "Ketuk \"Tambah\" untuk memasang aplikasi."
+    },
+    "nudge": "Buka StudyWork Planner lebih cepat dengan memasang aplikasinya.",
+    "nudgeDismiss": "Nanti saja",
+    "other": {
+      "step1": "Buka menu browser (ikon titik tiga).",
+      "step2": "Pilih \"Instal aplikasi\" atau \"Tambahkan ke layar utama\"."
+    },
+    "sheetTitle": "Cara memasang aplikasi"
+  },
+  "layout": {
+    "bottomNav": "Navigasi bawah",
+    "current": "halaman aktif",
+    "mainNav": "Navigasi utama",
+    "menu": "Menu",
+    "openMenu": "Buka menu",
+    "openSettings": "Buka pengaturan",
+    "skip": "Lewati ke konten utama"
+  },
+  "logout": {
+    "confirm": "Ya, Keluar",
+    "done": "Anda telah logout",
+    "question": "Yakin ingin keluar dari akun?",
+    "title": "Keluar"
+  },
+  "mood": {
+    "label": {
+      "1": "Sangat Buruk",
+      "2": "Buruk",
+      "3": "Netral",
+      "4": "Baik",
+      "5": "Sangat Baik"
+    },
+    "short": {
+      "1": "Sangat Buruk",
+      "2": "Buruk",
+      "3": "Netral",
+      "4": "Baik",
+      "5": "Sangat Baik"
+    }
+  },
+  "nav": {
+    "admin": "Admin",
+    "ai": "AI",
+    "categories": "Kategori",
+    "home": "Beranda",
+    "kuliah": "Tugas Kuliah",
+    "pribadi": "Tugas Pribadi",
+    "settings": "Pengaturan"
+  },
+  "notFound": {
+    "body": "Halaman yang Anda cari tidak tersedia atau sudah dipindahkan.",
+    "home": "Kembali ke beranda",
+    "title": "Halaman tidak ditemukan"
+  },
+  "notifications": {
+    "disable": "Matikan notifikasi",
+    "disabled": "Notifikasi dimatikan",
+    "enable": "Aktifkan notifikasi",
+    "enableFailed": "Gagal mengaktifkan notifikasi.",
+    "enabled": "Notifikasi diaktifkan",
+    "heading": "Notifikasi pengingat",
+    "hint": {
+      "unsupported": "Browser ini tidak mendukung notifikasi web. Coba Chrome, Edge, atau Firefox terbaru.",
+      "needs-install": "Di iPhone/iPad, pasang aplikasi ke Layar Utama lebih dulu, lalu aktifkan notifikasi.",
+      "blocked": "Notifikasi diblokir browser. Ketuk ikon gembok di bilah alamat, pilih \"Izinkan notifikasi\", lalu perbarui halaman.",
+      "active": "Pengingat akan dikirim ke perangkat ini sebelum deadline dimulai.",
+      "inactive": "Izin sudah diberikan, tetapi perangkat ini belum terdaftar. Aktifkan untuk menerima pengingat.",
+      "not-permission": "Saat menekan \"Aktifkan notifikasi\", browser akan meminta izin. Tidak ada data pribadi yang dikirim."
+    },
+    "region": "Pemberitahuan",
+    "status": {
+      "unsupported": "Tidak didukung",
+      "needs-install": "Perlu pasang aplikasi",
+      "blocked": "Diblokir oleh browser",
+      "active": "Aktif",
+      "inactive": "Belum aktif di perangkat ini",
+      "not-permission": "Belum diizinkan"
+    },
+    "test": {
+      "button": "Kirim notifikasi uji",
+      "failed": "Gagal mengirim notifikasi uji.",
+      "none": "Belum ada langganan aktif pada perangkat ini.",
+      "sent": "Notifikasi uji terkirim ({{count}})."
+    }
+  },
+  "offline": {
+    "banner": "Anda sedang offline. Perubahan tidak dapat disimpan."
+  },
+  "priority": {
+    "TOP": "Prioritas Utama",
+    "HIGH": "Prioritas Tinggi",
+    "MEDIUM": "Prioritas Sedang",
+    "LOW": "Prioritas Rendah"
+  },
+  "privacy": {
+    "title": "Kebijakan Privasi",
+    "updated": "Terakhir diperbarui: 1 Oktober 2026",
+    "back": "Kembali",
+    "link": "Kebijakan Privasi",
+    "data": {
+      "heading": "Data yang kami simpan",
+      "body": "StudyWork Planner menyimpan nama, email, dan password terenkripsi (argon2id) untuk akun Anda, serta tugas, kategori, mood, dan langganan notifikasi yang Anda buat sendiri."
+    },
+    "purpose": {
+      "heading": "Tujuan pengolahan",
+      "body": "Data digunakan hanya untuk menghitung prioritas tugas, menampilkan statistik pribadi, memberi rekomendasi berdasarkan mood, dan mengirim pengingat yang Anda aktifkan."
+    },
+    "storage": {
+      "heading": "Penyimpanan & keamanan",
+      "body": "Data disimpan di server proyek milik kelompok dan dilindungi sesi cookie HttpOnly. Peramban hanya menyimpan preferensi bahasa, draf form tugas, dan kunci pemasangan aplikasi."
+    },
+    "sharing": {
+      "heading": "Pembagian data",
+      "body": "Tidak ada data Anda yang dibagikan ke pihak ketiga atau digunakan untuk iklan. Rekomendasi dihitung di server tanpa mengirim data ke layanan AI eksternal."
+    },
+    "rights": {
+      "heading": "Hak Anda",
+      "body": "Anda dapat mengubah, menghapus tugas dan kategori kapan pun, mematikan notifikasi di halaman Pengaturan, serta meminta penghapusan akun kepada pengelola sistem."
+    }
+  },
+  "rec": {
+    "disclaimer": "Rekomendasi berbasis aturan (rule-based), bukan saran medis. Jika kamu merasa sangat tertekan, hubungi orang terdekat atau layanan konseling kampus/profesional.",
+    "empty": "Tidak ada tugas untuk direkomendasikan saat ini.",
+    "energy": {
+      "veryHigh": "Energi sangat tinggi",
+      "high": "Energi tinggi",
+      "medium": "Energi sedang",
+      "low": "Energi rendah",
+      "veryLow": "Energi sangat rendah"
+    },
+    "getRecommendations": "Dapatkan Rekomendasi",
+    "history": {
+      "title": "Riwayat mood 7 hari terakhir"
+    },
+    "lastMood": "Mood terakhir: {{label}}",
+    "listTitle": "Rekomendasi untukmu",
+    "match": "{{percent}}% kecocokan",
+    "moodQuestion": "Bagaimana Perasaanmu Hari Ini?",
+    "pickMood": "Pilih mood untuk melihat perkiraan energi dan saran tugas.",
+    "postpone": {
+      "heavyLowEnergy": "Tugas berat (kesulitan {{complexity}}/5) dengan sisa waktu {{days}} hari — sebaiknya ditunda sampai energi membaik."
+    },
+    "postponeTitle": "Saran Ditunda",
+    "reason": {
+      "urgentGentle": "Mood sedang rendah — mulai dari yang paling mendesak dengan beban paling ringan.",
+      "highEnergyComplex": "Energi tinggi, cocok untuk tugas kompleks (kesulitan {{complexity}}/5).",
+      "light": "Tugas ringan (kesulitan {{complexity}}/5) — pas untuk menjaga momentum.",
+      "fits": "Tingkat kesulitan {{complexity}}/5 sebanding dengan energimu saat ini.",
+      "warmup": "Pemanasan dulu: kesulitan {{complexity}}/5 lebih ringan dari energimu.",
+      "challenging": "Agak menantang (kesulitan {{complexity}}/5), tapi bisa dimulai dari sebagian."
+    },
+    "selfCare": {
+      "breathing": "Tarik napas dalam 4-7-8 selama 2 menit.",
+      "contactSupport": "Hubungi orang tepercaya atau layanan konseling kampus bila perasaan ini berlanjut.",
+      "hydrateScreenBreak": "Minum air dan istirahatkan mata dari layar 10 menit.",
+      "lightTaskFirst": "Selesaikan satu tugas kecil dulu untuk membangun rasa progres.",
+      "music": "Putar musik instrumental dengan volume rendah sebagai latar kerja.",
+      "pomodoro": "Pakai pomodoro 25 menit kerja + 5 menit istirahat.",
+      "refresh": "Saran lain",
+      "shortBreaks": "Ambil jeda pendek setiap 30 menit.",
+      "stretch": "Peregangan leher, bahu, dan punggung selama 3 menit.",
+      "talkToSomeone": "Ceritakan kondisimu ke teman atau keluarga.",
+      "title": "Self-Care Tip"
+    },
+    "subtitle": "Dapatkan rekomendasi tugas yang sesuai dengan kondisi mental dan energimu saat ini.",
+    "topPick": "Top Pick"
+  },
+  "roles": {
+    "MAHASISWA": "Mahasiswa",
+    "SUPERADMIN": "SuperAdmin"
+  },
+  "scale": {
+    "difficulty": {
+      "1": "1 Sangat Mudah",
+      "2": "2 Mudah",
+      "3": "3 Sedang",
+      "4": "4 Sulit",
+      "5": "5 Sangat Sulit"
+    },
+    "importance": {
+      "1": "1 Tidak Penting",
+      "2": "2 Kurang Penting",
+      "3": "3 Cukup Penting",
+      "4": "4 Penting",
+      "5": "5 Critical"
+    }
+  },
+  "scope": {
+    "analytics": {
+      "done": "{{scope}} selesai",
+      "total": "Total {{scope}}"
+    }
+  },
+  "settings": {
+    "about": {
+      "heading": "Tentang",
+      "privacy": "Kebijakan Privasi",
+      "version": "Versi aplikasi"
+    },
+    "capacity": {
+      "hint": "Perkiraan maksimal jam kerja per hari (1–24, langkah 0,5). Dipakai untuk mendeteksi kelebihan beban.",
+      "label": "Kapasitas beban harian (jam)"
+    },
+    "errors": {
+      "capacity": "Isi angka antara 1 dan 24.",
+      "name": "Nama harus 3–100 karakter.",
+      "timezone": "Zona waktu tidak dikenali. Pilih dari daftar."
+    },
+    "language": {
+      "title": "Bahasa",
+      "id": "Indonesia",
+      "en": "English"
+    },
+    "profile": {
+      "email": "Email",
+      "heading": "Profil",
+      "name": "Nama Lengkap"
+    },
+    "save": "Simpan Perubahan",
+    "saveFailed": "Gagal menyimpan perubahan.",
+    "saved": "Pengaturan tersimpan.",
+    "subtitle": "Sesuaikan profil, waktu, dan notifikasi Anda",
+    "timezone": {
+      "hint": "Mengubah zona waktu menyusun ulang pengingat rutinitas.",
+      "label": "Zona waktu",
+      "other": "Lainnya…",
+      "otherPick": "Pilih zona waktu",
+      "search": "Cari zona waktu IANA",
+      "wib": "WIB (UTC+7)",
+      "wita": "WITA (UTC+8)",
+      "wit": "WIT (UTC+9)"
+    },
+    "title": "Pengaturan"
+  },
+  "sort": {
+    "deadline": "Deadline",
+    "newest": "Terbaru",
+    "priority": "Prioritas"
+  },
+  "tasks": {
+    "activeCount": "{{count}} tugas aktif",
+    "add": "Tambah Tugas",
+    "deadlinePrefix": "Tenggat",
+    "delete": {
+      "confirm": "Apakah Anda yakin ingin menghapus tugas ini?",
+      "confirmTitle": "Hapus Tugas"
+    },
+    "deleted": "Tugas berhasil dihapus",
+    "detail": {
+      "category": "Kategori",
+      "delete": "Hapus Tugas",
+      "difficulty": "Tingkat Kesulitan",
+      "duration": "Estimasi Durasi",
+      "edit": "Edit Tugas",
+      "importance": "Tingkat Kepentingan",
+      "noDescription": "Tidak ada deskripsi.",
+      "reminder": "Reminder berikutnya",
+      "reminderNone": "Tidak ada reminder",
+      "score": "Rincian skor",
+      "time": "Waktu"
+    },
+    "editNotFound": "Tugas tidak ditemukan.",
+    "empty": "Belum ada tugas",
+    "emptyFiltered": "Tidak ada tugas yang cocok dengan filter",
+    "emptyHint": "Tambahkan tugas pertamamu untuk mulai",
+    "field": {
+      "start": "Waktu Mulai",
+      "deadline": "Deadline",
+      "days": "Hari Rutin"
+    },
+    "filter": {
+      "priority": "Prioritas",
+      "sort": "Urutkan",
+      "status": "Status",
+      "time": "Waktu",
+      "type": "Tipe"
+    },
+    "form": {
+      "add": "Tambah Tugas",
+      "category": "Kategori Tugas",
+      "categoryPlaceholder": "Pilih kategori",
+      "created": "Tugas berhasil ditambahkan",
+      "dateLabel": "{{label}} — tanggal",
+      "deadline": "Deadline",
+      "description": "Deskripsi",
+      "descriptionPlaceholder": "Tambahkan deskripsi tugas...",
+      "difficulty": "Tingkat Kesulitan",
+      "duration": "Estimasi Durasi Pengerjaan",
+      "edit": "Edit Tugas",
+      "endAt": "Waktu Selesai",
+      "errors": {
+        "categoryRequired": "Pilih kategori terlebih dahulu.",
+        "duplicateDays": "Hari rutin tidak boleh ganda.",
+        "endBeforeStart": "Waktu selesai harus setelah waktu mulai.",
+        "minOneDay": "Pilih minimal satu hari rutin.",
+        "stepHalf": "Gunakan kelipatan 0,5 jam.",
+        "stepQuarter": "Gunakan kelipatan 0,25 jam.",
+        "typeRequired": "Pilih tipe tugas."
+      },
+      "hoursUnit": "jam",
+      "importance": "Tingkat Kepentingan",
+      "manageCategories": "+ Kelola kategori",
+      "pastWarning": "Waktu yang dipilih sudah terlewat. Tugas tetap dapat disimpan.",
+      "priorityIncomplete": "Lengkapi kategori dan waktu untuk melihat perkiraan prioritas.",
+      "priorityPreview": "Perkiraan prioritas:",
+      "requiredHint": "Kolom dengan tanda * wajib diisi.",
+      "routineDays": "Hari Rutin",
+      "routineStart": "Jam Mulai",
+      "sessionDuration": "Durasi per Sesi",
+      "sessionDurationHint": "Perkiraan lama tiap sesi, dalam jam.",
+      "startAt": "Waktu Mulai",
+      "subtitle": "Isi detail tugas; prioritas dihitung otomatis",
+      "timeLabel": "{{label}} — jam",
+      "title": "Judul Tugas",
+      "titlePlaceholder": "Contoh: Quiz Matematika Diskrit",
+      "type": "Tipe Tugas",
+      "updated": "Perubahan tersimpan",
+      "willAppearIn": "Tugas ini akan tampil di halaman {{page}}"
+    },
+    "listLabel": "Daftar tugas",
+    "noTime": "Tanpa waktu",
+    "openDetail": "Buka detail {{title}}",
+    "saving": "Menyimpan…",
+    "search": "Cari tugas",
+    "searchPlaceholder": "Cari judul atau deskripsi",
+    "status": {
+      "TODO": "Belum",
+      "IN_PROGRESS": "Sedang",
+      "DONE": "Selesai"
+    },
+    "statusLabel": "Ubah status tugas {{title}}, saat ini {{status}}",
+    "triState": {
+      "help": "Ketuk kotak untuk mengubah status",
+      "hint": "Belum → Sedang → Selesai"
+    },
+    "type": {
+      "FIXED_TIME": "Fixed-time",
+      "DEADLINE": "Deadline",
+      "ROUTINE": "Routine"
+    }
+  },
+  "time": {
+    "days": {
+      "long1": "Senin",
+      "long2": "Selasa",
+      "long3": "Rabu",
+      "long4": "Kamis",
+      "long5": "Jumat",
+      "long6": "Sabtu",
+      "long7": "Minggu",
+      "short1": "Sen",
+      "short2": "Sel",
+      "short3": "Rab",
+      "short4": "Kam",
+      "short5": "Jum",
+      "short6": "Sab",
+      "short7": "Min"
+    },
+    "duration": {
+      "hours": "{{value}} jam",
+      "minutes": "{{value}} menit",
+      "none": "Tanpa estimasi"
+    },
+    "month": "Bulan ini",
+    "overdue": {
+      "minute": "Terlambat {{value}} menit",
+      "hour": "Terlambat {{value}} jam",
+      "day": "Terlambat {{value}} hari",
+      "week": "Terlambat {{value}} minggu"
+    },
+    "remaining": {
+      "minute": "{{value}} menit lagi",
+      "hour": "{{value}} jam lagi",
+      "day": "{{value}} hari lagi",
+      "week": "{{value}} minggu lagi"
+    },
+    "today": "Hari ini",
+    "week": "Minggu ini"
+  },
+  "update": {
+    "available": "Versi baru tersedia",
+    "offlineReady": "Aplikasi siap dipakai offline",
+    "reload": "Muat ulang"
+  }
+}

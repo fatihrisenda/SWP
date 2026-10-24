@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Tipografi & dasar (SKPL 4.1.2): sans-serif sistem 14-16 px, tanpa CDN / Google Fonts
+ * (CSP `font-src 'self'`). Semua warna dari token di tailwind.config.cjs.
+ */
+@layer base {
+  :root {
+    color-scheme: light; /* mode terang saja untuk rilis 1.0 (Issue 064) */
+    --swp-nav-h: 64px;
+  }
+
+  html {
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100vh;
+    overscroll-behavior-y: none;
+    overflow-x: hidden; /* tidak ada scroll horizontal di 360 px */
+  }
+
+  /* fallback 100vh -> 100dvh hanya bila didukung (Issue 064: tanpa unit dvh tanpa fallback) */
+  @supports (height: 100dvh) {
+    body {
+      min-height: 100dvh;
+    }
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+
+  /* iOS berhenti zoom saat fokus input karena font-size >= 16 px */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+  }
+
+  h1 {
+    @apply text-h1 font-bold;
+  }
+
+  h2 {
+    @apply text-h2 font-semibold;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card bg-white shadow-card border border-line;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .skip-link {
+    @apply absolute left-3 top-3 z-50 -translate-y-24 rounded bg-primary-dark px-4 py-2 text-label text-white transition-transform;
+  }
+
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-badge font-semibold;
+    min-height: 20px;
+  }
+}
+
+/* Semua animasi dimatikan saat pengguna meminta reduced motion (Issue 035). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

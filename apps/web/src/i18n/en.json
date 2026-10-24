@@ -1,0 +1,630 @@
+{
+  "app": {
+    "name": "StudyWork Planner"
+  },
+  "admin": {
+    "actions": "Actions",
+    "add": "Add User",
+    "addTitle": "Add New User",
+    "cannotDeleteSelf": "You cannot delete your own account",
+    "createdAt": "Registration Date",
+    "delete": {
+      "confirm": "Are you sure you want to delete this user? All related data (tasks, moods, categories) will be deleted too.",
+      "ok": "Yes, Delete",
+      "title": "Delete User"
+    },
+    "deleteFor": "Delete {{name}}",
+    "editFor": "Edit {{name}}",
+    "editTitle": "Edit User",
+    "email": "Email",
+    "emailTaken": "This email is already used by another user",
+    "empty": "No users yet",
+    "lastSuperAdmin": "The last SuperAdmin cannot be deleted or demoted",
+    "list": "User list",
+    "name": "Full Name",
+    "password": "Password",
+    "passwordKeepHint": "Leave blank to keep unchanged",
+    "passwordOptionalPlaceholder": "At least 8 characters",
+    "role": "Role",
+    "search": "Search users",
+    "searchPlaceholder": "Search by name or email",
+    "stats": {
+      "title": "User statistics",
+      "total": "Total Users",
+      "mahasiswa": "Total Students",
+      "superadmin": "Total SuperAdmins"
+    },
+    "subtitle": "Manage all users in the system",
+    "userCreated": "User added",
+    "userUpdated": "User changes saved",
+    "userDeleted": "User deleted",
+    "you": "(you)"
+  },
+  "auth": {
+    "email": "Email",
+    "emailPlaceholder": "name@email.com",
+    "errors": {
+      "emailInvalid": "Invalid email format",
+      "emailTaken": "This email is already registered",
+      "passwordMin": "Password must be at least 8 characters",
+      "passwordMismatch": "Password confirmation does not match"
+    },
+    "hidePassword": "Hide password",
+    "login": {
+      "button": "Sign in",
+      "invalid": "Invalid email or password",
+      "noAccount": "No account yet?",
+      "passwordPlaceholder": "Enter your password",
+      "rateLimited": "Too many attempts. Try again in {{minutes}} minutes.",
+      "subtitle": "Sign in to your account",
+      "success": "Signed in successfully",
+      "title": "Sign in"
+    },
+    "name": "Full Name",
+    "password": "Password",
+    "register": {
+      "button": "Sign up",
+      "confirmPassword": "Confirm Password",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in here",
+      "passwordPlaceholder": "At least 8 characters",
+      "rateLimited": "Too many attempts. Try again in {{minutes}} minutes.",
+      "strength": {
+        "0": "Password is too short",
+        "1": "Strength: weak",
+        "2": "Strength: fair",
+        "3": "Strength: good"
+      },
+      "success": "Welcome to StudyWork Planner!",
+      "title": "Create New Account"
+    },
+    "remember": "Remember Me",
+    "showPassword": "Show password"
+  },
+  "categoryType": {
+    "KULIAH": "Study",
+    "PRIBADI": "Personal"
+  },
+  "categories": {
+    "actions": "Actions",
+    "actionsFor": "Actions for {{name}}",
+    "add": "Add Category",
+    "addTitle": "Add Category",
+    "changeType": {
+      "body": "{{count}} tasks will move to the {{page}} page.",
+      "title": "Change category type?"
+    },
+    "color": "Color",
+    "colorCustom": "Custom color",
+    "colorHex": "Color must use the #RRGGBB format",
+    "created": "Category added",
+    "delete": {
+      "confirm": "Are you sure you want to delete this category?",
+      "title": "Delete Category"
+    },
+    "deleted": "Category deleted",
+    "edit": "Edit",
+    "editTitle": "Edit Category",
+    "empty": "No categories yet",
+    "emptyBody": "Add categories to keep your tasks organised.",
+    "emptyHint": "Add your first category to get started.",
+    "emptyTitle": "No categories yet",
+    "errors": {
+      "colorFormat": "Color must use the #RRGGBB format",
+      "nameTaken": "This category name is already taken"
+    },
+    "inUse": "The category is still used by tasks. Move those tasks first.",
+    "name": "Category Name",
+    "namePlaceholder": "Example: Final Exam",
+    "palette": "Colour palette",
+    "pickColor": "Pick colour {{color}}",
+    "reassign": {
+      "body": "{{name}} is still used by {{count}} tasks. Choose a target category, then delete.",
+      "none": "There is no other category of the same type. Create one first.",
+      "pick": "Move tasks to",
+      "title": "Category still in use"
+    },
+    "saveFailed": "Could not save the category.",
+    "subtitle": "Manage the categories for your tasks",
+    "type": "Type",
+    "updated": "Category changes saved"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "OK",
+    "delete": "Delete",
+    "edit": "Edit",
+    "leave": "Leave",
+    "loadMore": "Load more ({{shown}} of {{total}})",
+    "loading": "Loading…",
+    "logout": "Sign out",
+    "refresh": "Refresh",
+    "retry": "Try again",
+    "save": "Save",
+    "saveChanges": "Save Changes"
+  },
+  "conflicts": {
+    "adjust": "Reschedule",
+    "collides": "Clashes with \"{{title}}\" ({{time}}).",
+    "deleteLow": "Delete task \"{{title}}\" ({{label}})",
+    "listLabel": "Schedule conflicts",
+    "maxRechecks": "The suggested slot was reused 3 times in a row. Adjust the time manually.",
+    "overload": "Load on {{day}}: {{hours}} hours — above your daily capacity.",
+    "saveAnyway": "Save Anyway",
+    "tightGap": "Gap with \"{{title}}\" is only {{minutes}} minutes (at least 30 recommended).",
+    "title": "Schedule Conflict Detected",
+    "useSuggestion": "Use suggested slot: {{time}}"
+  },
+  "dash": {
+    "all": {
+      "title": "All Tasks"
+    },
+    "analytics": {
+      "done": "Completed Tasks",
+      "doneHint": "Marked as done",
+      "highPriority": "High Priority",
+      "highPriorityHint": "TOP and HIGH",
+      "title": "Task summary",
+      "total": "Total Tasks",
+      "totalHours": "Total Work Time",
+      "totalHoursHint": "Sum of estimated durations"
+    },
+    "dueSoon": "{{count}} tasks are due / start within the next 24 hours.",
+    "filter": {
+      "category": "Category"
+    },
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening",
+      "night": "Good night"
+    },
+    "mood": {
+      "hint": "Set today's mood to get recommendations that fit you.",
+      "noPick": "No recommendation yet. Set your mood to see suggestions.",
+      "openAi": "See recommendations",
+      "question": "How do you feel today?",
+      "saved": "Mood saved",
+      "today": "Today's mood: {{label}}",
+      "topPick": "Top pick: {{title}}"
+    },
+    "nearest": {
+      "empty": "No upcoming tasks yet.",
+      "title": "4 Nearest Tasks"
+    },
+    "quick": {
+      "activeCount": "{{count}} active",
+      "title": "Quick Access"
+    }
+  },
+  "errors": {
+    "boundary": {
+      "body": "Something went wrong in the app. Reload the page to continue.",
+      "reload": "Reload",
+      "title": "Something went wrong"
+    },
+    "conflictCheck": "The conflict check failed. Check your connection and try again.",
+    "generic": "Something went wrong. Please try again.",
+    "loadFailed": "Could not load the data.",
+    "network": "No connection. Your changes were not saved."
+  },
+  "filter": {
+    "active": "Active",
+    "all": "All",
+    "done": "Done"
+  },
+  "form": {
+    "draftContinue": "Continue",
+    "draftDiscard": "Discard",
+    "draftFound": "Continue your previous draft?",
+    "errors": {
+      "descriptionMax": "Description is limited to 1000 characters",
+      "invalid": "Invalid value",
+      "invalidDate": "Invalid date",
+      "invalidTime": "Invalid time",
+      "nameMax": "Name is limited to 50 characters",
+      "required": "Required",
+      "titleMax": "Title is limited to 100 characters",
+      "titleRequired": "Title is required",
+      "tooLong": "Too long",
+      "tooShort": "Too short"
+    },
+    "unsaved": "Unsaved changes will be lost.",
+    "unsavedTitle": "Leave this page?"
+  },
+  "install": {
+    "button": "Install App",
+    "heading": "Install the app",
+    "hint": "Install it on your phone or desktop to open it standalone and keep it available offline.",
+    "installed": "App installed",
+    "ios": {
+      "pushNote": "Reminder notifications only work after installing the app (iOS 16.4 or later).",
+      "step1": "Tap the Share icon (a box with an up arrow).",
+      "step2": "Choose \"Add to Home Screen\".",
+      "step3": "Tap \"Add\" to install the app."
+    },
+    "nudge": "Get faster access to StudyWork Planner by installing the app.",
+    "nudgeDismiss": "Not now",
+    "other": {
+      "step1": "Open the browser menu (three-dot icon).",
+      "step2": "Choose \"Install app\" or \"Add to home screen\"."
+    },
+    "sheetTitle": "How to install the app"
+  },
+  "layout": {
+    "bottomNav": "Bottom navigation",
+    "current": "current page",
+    "mainNav": "Main navigation",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "openSettings": "Open settings",
+    "skip": "Skip to main content"
+  },
+  "logout": {
+    "confirm": "Yes, Sign out",
+    "done": "You have signed out",
+    "question": "Are you sure you want to sign out?",
+    "title": "Sign out"
+  },
+  "mood": {
+    "label": {
+      "1": "Very bad",
+      "2": "Bad",
+      "3": "Neutral",
+      "4": "Good",
+      "5": "Very good"
+    },
+    "short": {
+      "1": "Very bad",
+      "2": "Bad",
+      "3": "Neutral",
+      "4": "Good",
+      "5": "Very good"
+    }
+  },
+  "nav": {
+    "admin": "Admin",
+    "ai": "AI",
+    "categories": "Categories",
+    "home": "Home",
+    "kuliah": "Study Tasks",
+    "pribadi": "Personal Tasks",
+    "settings": "Settings"
+  },
+  "notFound": {
+    "body": "The page you are looking for is not available or has moved.",
+    "home": "Back to home",
+    "title": "Page not found"
+  },
+  "notifications": {
+    "disable": "Turn notifications off",
+    "disabled": "Notifications turned off",
+    "enable": "Enable notifications",
+    "enableFailed": "Could not enable notifications.",
+    "enabled": "Notifications enabled",
+    "heading": "Reminder notifications",
+    "hint": {
+      "unsupported": "This browser does not support web notifications. Try a recent Chrome, Edge, or Firefox.",
+      "needs-install": "On iPhone/iPad, install the app to your Home Screen first, then enable notifications.",
+      "blocked": "Notifications are blocked by the browser. Tap the lock icon in the address bar, choose \"Allow notifications\", then refresh.",
+      "active": "Reminders will be sent to this device before a task starts.",
+      "inactive": "Permission is granted, but this device is not registered yet. Enable it to receive reminders.",
+      "not-permission": "Pressing \"Enable notifications\" asks the browser for permission. No personal data is sent to third parties."
+    },
+    "region": "Notifications",
+    "status": {
+      "unsupported": "Not supported",
+      "needs-install": "Install required",
+      "blocked": "Blocked by browser",
+      "active": "Active",
+      "inactive": "Not active on this device",
+      "not-permission": "Not allowed yet"
+    },
+    "test": {
+      "button": "Send test notification",
+      "failed": "Could not send the test notification.",
+      "none": "No active subscription on this device.",
+      "sent": "Test notification delivered ({{count}})."
+    }
+  },
+  "offline": {
+    "banner": "You are offline. Changes cannot be saved."
+  },
+  "priority": {
+    "TOP": "Top Priority",
+    "HIGH": "High Priority",
+    "MEDIUM": "Medium Priority",
+    "LOW": "Low Priority"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: 1 October 2026",
+    "back": "Back",
+    "link": "Privacy Policy",
+    "data": {
+      "heading": "Data we store",
+      "body": "StudyWork Planner stores your name, email, and an encrypted password (argon2id) for the account, plus the tasks, categories, moods, and notification subscriptions you create."
+    },
+    "purpose": {
+      "heading": "Why we process it",
+      "body": "Your data is used only to compute task priorities, show your personal statistics, recommend tasks based on your mood, and send reminders you have enabled."
+    },
+    "storage": {
+      "heading": "Storage & security",
+      "body": "Data is kept on the project server and protected by an HttpOnly session cookie. The browser only stores your language preference, task form draft, and app-install hint."
+    },
+    "sharing": {
+      "heading": "Data sharing",
+      "body": "None of your data is shared with third parties or used for advertising. Recommendations are computed on our server without sending data to external AI services."
+    },
+    "rights": {
+      "heading": "Your rights",
+      "body": "You can edit or delete your tasks and categories at any time, turn notifications off in Settings, and ask the system administrator to remove your account."
+    }
+  },
+  "rec": {
+    "disclaimer": "These are rule-based recommendations, not medical advice. If you feel very overwhelmed, talk to someone close to you or your campus counselling service.",
+    "empty": "There are no tasks to recommend right now.",
+    "energy": {
+      "veryHigh": "Very high energy",
+      "high": "High energy",
+      "medium": "Medium energy",
+      "low": "Low energy",
+      "veryLow": "Very low energy"
+    },
+    "getRecommendations": "Get Recommendations",
+    "history": {
+      "title": "Mood history, last 7 days"
+    },
+    "lastMood": "Last mood: {{label}}",
+    "listTitle": "Recommended for you",
+    "match": "{{percent}}% match",
+    "moodQuestion": "How Do You Feel Today?",
+    "pickMood": "Pick a mood to see your energy estimate and task suggestions.",
+    "postpone": {
+      "heavyLowEnergy": "Heavy task (difficulty {{complexity}}/5) with {{days}} days left — better to postpone until your energy improves."
+    },
+    "postponeTitle": "Suggested to Postpone",
+    "reason": {
+      "urgentGentle": "Your mood is low — start with the most urgent item at the lightest load.",
+      "highEnergyComplex": "High energy suits a complex task (difficulty {{complexity}}/5).",
+      "light": "A light task (difficulty {{complexity}}/5) — good for keeping momentum.",
+      "fits": "Difficulty {{complexity}}/5 matches your current energy.",
+      "warmup": "Warm up first: difficulty {{complexity}}/5 is lighter than your energy level.",
+      "challenging": "Rather challenging (difficulty {{complexity}}/5), but you can start with part of it."
+    },
+    "selfCare": {
+      "breathing": "Take 4-7-8 breaths for 2 minutes.",
+      "contactSupport": "Reach out to someone you trust or your campus counselling service if this feeling lasts.",
+      "hydrateScreenBreak": "Drink water and rest your eyes from the screen for 10 minutes.",
+      "lightTaskFirst": "Finish one small task first to build a sense of progress.",
+      "music": "Play low-volume instrumental music as background while you work.",
+      "pomodoro": "Use a pomodoro: 25 minutes of work + 5 minutes of rest.",
+      "refresh": "Another tip",
+      "shortBreaks": "Take a short break every 30 minutes.",
+      "stretch": "Stretch your neck, shoulders, and back for 3 minutes.",
+      "talkToSomeone": "Tell a friend or family member how you feel.",
+      "title": "Self-Care Tip"
+    },
+    "subtitle": "Get task recommendations that match your mental state and energy right now.",
+    "topPick": "Top Pick"
+  },
+  "roles": {
+    "MAHASISWA": "Student",
+    "SUPERADMIN": "SuperAdmin"
+  },
+  "scale": {
+    "difficulty": {
+      "1": "1 Very easy",
+      "2": "2 Easy",
+      "3": "3 Moderate",
+      "4": "4 Hard",
+      "5": "5 Very hard"
+    },
+    "importance": {
+      "1": "1 Not important",
+      "2": "2 Less important",
+      "3": "3 Fairly important",
+      "4": "4 Important",
+      "5": "5 Critical"
+    }
+  },
+  "scope": {
+    "analytics": {
+      "done": "{{scope}} completed",
+      "total": "Total {{scope}}"
+    }
+  },
+  "settings": {
+    "about": {
+      "heading": "About",
+      "privacy": "Privacy Policy",
+      "version": "App version"
+    },
+    "capacity": {
+      "hint": "Estimated maximum working hours per day (1-24, in 0.5 steps). Used to detect overcommitment.",
+      "label": "Daily workload capacity (hours)"
+    },
+    "errors": {
+      "capacity": "Enter a number between 1 and 24.",
+      "name": "Name must be 3-100 characters.",
+      "timezone": "Unknown time zone. Pick one from the list."
+    },
+    "language": {
+      "title": "Language",
+      "id": "Bahasa Indonesia",
+      "en": "English"
+    },
+    "profile": {
+      "email": "Email",
+      "heading": "Profile",
+      "name": "Full Name"
+    },
+    "save": "Save Changes",
+    "saveFailed": "Could not save your changes.",
+    "saved": "Settings saved.",
+    "subtitle": "Adjust your profile, time zone, and notifications",
+    "timezone": {
+      "hint": "Changing the time zone reschedules routine reminders.",
+      "label": "Time zone",
+      "other": "Other…",
+      "otherPick": "Pick a time zone",
+      "search": "Search IANA time zone",
+      "wib": "WIB (UTC+7)",
+      "wita": "WITA (UTC+8)",
+      "wit": "WIT (UTC+9)"
+    },
+    "title": "Settings"
+  },
+  "sort": {
+    "deadline": "Deadline",
+    "newest": "Newest",
+    "priority": "Priority"
+  },
+  "tasks": {
+    "activeCount": "{{count}} active tasks",
+    "add": "Add Task",
+    "deadlinePrefix": "Due",
+    "delete": {
+      "confirm": "Are you sure you want to delete this task?",
+      "confirmTitle": "Delete Task"
+    },
+    "deleted": "Task deleted",
+    "detail": {
+      "category": "Category",
+      "delete": "Delete Task",
+      "difficulty": "Difficulty",
+      "duration": "Estimated duration",
+      "edit": "Edit Task",
+      "importance": "Importance",
+      "noDescription": "No description.",
+      "reminder": "Next reminder",
+      "reminderNone": "No reminder",
+      "score": "Score breakdown",
+      "time": "Time"
+    },
+    "editNotFound": "Task not found.",
+    "empty": "No tasks yet",
+    "emptyFiltered": "No tasks match these filters",
+    "emptyHint": "Add your first task to get started",
+    "field": {
+      "start": "Start time",
+      "deadline": "Deadline",
+      "days": "Routine days"
+    },
+    "filter": {
+      "priority": "Priority",
+      "sort": "Sort by",
+      "status": "Status",
+      "time": "Time",
+      "type": "Type"
+    },
+    "form": {
+      "add": "Add Task",
+      "category": "Task Category",
+      "categoryPlaceholder": "Choose a category",
+      "created": "Task added",
+      "dateLabel": "{{label}} — date",
+      "deadline": "Deadline",
+      "description": "Description",
+      "descriptionPlaceholder": "Add a task description...",
+      "difficulty": "Difficulty",
+      "duration": "Estimated Work Duration",
+      "edit": "Edit Task",
+      "endAt": "End Time",
+      "errors": {
+        "categoryRequired": "Choose a category first.",
+        "duplicateDays": "Routine days must not repeat.",
+        "endBeforeStart": "The end time must be after the start time.",
+        "minOneDay": "Pick at least one routine day.",
+        "stepHalf": "Use 0.5-hour steps.",
+        "stepQuarter": "Use 0.25-hour steps.",
+        "typeRequired": "Choose a task type."
+      },
+      "hoursUnit": "hours",
+      "importance": "Importance",
+      "manageCategories": "+ Manage categories",
+      "pastWarning": "The time you picked is already in the past. The task can still be saved.",
+      "priorityIncomplete": "Complete the category and time to preview the priority.",
+      "priorityPreview": "Estimated priority:",
+      "requiredHint": "Fields marked with * are required.",
+      "routineDays": "Routine Days",
+      "routineStart": "Start Time",
+      "sessionDuration": "Duration per Session",
+      "sessionDurationHint": "How long each session lasts, in hours.",
+      "startAt": "Start Time",
+      "subtitle": "Fill in the task details; the priority is calculated automatically",
+      "timeLabel": "{{label}} — time",
+      "title": "Task Title",
+      "titlePlaceholder": "Example: Discrete Math Quiz",
+      "type": "Task Type",
+      "updated": "Changes saved",
+      "willAppearIn": "This task will appear on the {{page}} page"
+    },
+    "listLabel": "Task list",
+    "noTime": "No time",
+    "openDetail": "Open details for {{title}}",
+    "saving": "Saving…",
+    "search": "Search tasks",
+    "searchPlaceholder": "Search title or description",
+    "status": {
+      "TODO": "Not started",
+      "IN_PROGRESS": "In progress",
+      "DONE": "Done"
+    },
+    "statusLabel": "Change status of task {{title}}, currently {{status}}",
+    "triState": {
+      "help": "Tap the box to change the status",
+      "hint": "Not started → In progress → Done"
+    },
+    "type": {
+      "FIXED_TIME": "Fixed-time",
+      "DEADLINE": "Deadline",
+      "ROUTINE": "Routine"
+    }
+  },
+  "time": {
+    "days": {
+      "long1": "Monday",
+      "long2": "Tuesday",
+      "long3": "Wednesday",
+      "long4": "Thursday",
+      "long5": "Friday",
+      "long6": "Saturday",
+      "long7": "Sunday",
+      "short1": "Mon",
+      "short2": "Tue",
+      "short3": "Wed",
+      "short4": "Thu",
+      "short5": "Fri",
+      "short6": "Sat",
+      "short7": "Sun"
+    },
+    "duration": {
+      "hours": "{{value}} hours",
+      "minutes": "{{value}} minutes",
+      "none": "No estimate"
+    },
+    "month": "This month",
+    "overdue": {
+      "minute": "{{value}} minutes overdue",
+      "hour": "{{value}} hours overdue",
+      "day": "{{value}} days overdue",
+      "week": "{{value}} weeks overdue"
+    },
+    "remaining": {
+      "minute": "{{value}} minutes left",
+      "hour": "{{value}} hours left",
+      "day": "{{value}} days left",
+      "week": "{{value}} weeks left"
+    },
+    "today": "Today",
+    "week": "This week"
+  },
+  "update": {
+    "available": "A new version is available",
+    "offlineReady": "The app is ready to use offline",
+    "reload": "Reload"
+  }
+}

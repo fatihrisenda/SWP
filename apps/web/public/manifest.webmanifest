@@ -1,0 +1,36 @@
+{
+  "id": "/",
+  "name": "StudyWork Planner",
+  "short_name": "StudyWork",
+  "description": "Kelola tugas kuliah & pribadi dengan prioritas otomatis dan rekomendasi sesuai mood.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#F4F7FC",
+  "theme_color": "#1D4ED8",
+  "categories": ["productivity", "education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tambah Tugas",
+      "short_name": "Tambah",
+      "description": "Buat tugas baru",
+      "url": "/tugas/baru",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Rekomendasi AI",
+      "short_name": "AI",
+      "description": "Tugas yang cocok dengan mood Anda",
+      "url": "/ai",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

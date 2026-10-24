@@ -1,0 +1,183 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MAHASISWA
+  SUPERADMIN
+}
+
+enum CategoryType {
+  KULIAH
+  PRIBADI
+}
+
+enum TaskType {
+  FIXED_TIME
+  DEADLINE
+  ROUTINE
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum ReminderStatus {
+  PENDING
+  SENT
+  CANCELLED
+  FAILED
+  EXPIRED
+}
+
+model User {
+  id                 String   @id @default(uuid()) @db.Uuid
+  name               String   @db.VarChar(100)
+  email              String   @unique @db.VarChar(254) // selalu lowercase (D-23)
+  passwordHash       String   @map("password_hash")
+  role               Role     @default(MAHASISWA)
+  timezone           String   @default("Asia/Jakarta") @db.VarChar(64) // IANA (D-20)
+  locale             String   @default("id") @db.VarChar(5) // 'id' | 'en'
+  dailyCapacityHours Decimal  @default(8) @map("daily_capacity_hours") @db.Decimal(4, 1) // D-12
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  sessions   Session[]
+  categories Category[]
+  tasks      Task[]
+  moods      MoodEntry[]
+  pushSubs   PushSubscription[]
+  reminders  Reminder[]
+
+  @@map("users")
+}
+
+model Session {
+  // = entitas Session di class diagram SKPL
+  id         String    @id @default(uuid()) @db.Uuid // = "sid" di JWT
+  userId     String    @map("user_id") @db.Uuid
+  expiresAt  DateTime  @map("expires_at") @db.Timestamptz(3)
+  revokedAt  DateTime? @map("revoked_at") @db.Timestamptz(3)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  lastSeenAt DateTime  @default(now()) @map("last_seen_at") @db.Timestamptz(3)
+  userAgent  String?   @map("user_agent") @db.VarChar(255)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model Category {
+  id        String       @id @default(uuid()) @db.Uuid
+  userId    String       @map("user_id") @db.Uuid
+  name      String       @db.VarChar(50)
+  color     String       @db.Char(7) // '#RRGGBB' (CHECK di migrasi)
+  type      CategoryType
+  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks     Task[]
+
+  @@index([userId, type])
+  @@map("categories")
+  // unique (user_id, type, lower(name)) → ditambahkan lewat SQL migrasi
+}
+
+model Task {
+  id          String     @id @default(uuid()) @db.Uuid
+  userId      String     @map("user_id") @db.Uuid
+  categoryId  String     @map("category_id") @db.Uuid
+  title       String     @db.VarChar(100)
+  description String?    @db.VarChar(1000)
+  type        TaskType
+  status      TaskStatus @default(TODO)
+  importance  Int        @db.SmallInt // 1..5
+  difficulty  Int        @db.SmallInt // 1..5
+  // FIXED_TIME
+  startAt     DateTime?  @map("start_at") @db.Timestamptz(3)
+  endAt       DateTime?  @map("end_at") @db.Timestamptz(3)
+  // DEADLINE
+  deadlineAt  DateTime?  @map("deadline_at") @db.Timestamptz(3)
+  // DEADLINE & ROUTINE (menit, integer — hindari float)
+  durationMinutes    Int?      @map("duration_minutes")
+  // ROUTINE
+  routineDays        Int[]     @map("routine_days") @db.SmallInt // ISO: 1=Senin … 7=Minggu
+  routineStartMinute Int?      @map("routine_start_minute") @db.SmallInt // 0..1439, jam lokal user
+  doneAt             DateTime? @map("done_at") @db.Timestamptz(3)
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category  Category   @relation(fields: [categoryId], references: [id], onDelete: Restrict) // D-09
+  reminders Reminder[]
+
+  @@index([userId, status])
+  @@index([userId, deadlineAt])
+  @@index([userId, startAt])
+  @@index([userId, categoryId])
+  @@map("tasks")
+}
+
+model Reminder {
+  id        String         @id @default(uuid()) @db.Uuid
+  taskId    String         @map("task_id") @db.Uuid
+  userId    String         @map("user_id") @db.Uuid
+  remindAt  DateTime       @map("remind_at") @db.Timestamptz(3)
+  eventAt   DateTime       @map("event_at") @db.Timestamptz(3) // waktu acara yang diingatkan
+  status    ReminderStatus @default(PENDING)
+  attempts  Int            @default(0)
+  sentAt    DateTime?      @map("sent_at") @db.Timestamptz(3)
+  lastError String?        @map("last_error") @db.VarChar(255)
+  createdAt DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  task      Task           @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("reminders")
+  // index parsial (status='PENDING') + unique parsial (task_id) WHERE PENDING → SQL migrasi
+}
+
+model PushSubscription {
+  id            String    @id @default(uuid()) @db.Uuid
+  userId        String    @map("user_id") @db.Uuid
+  endpoint      String    @unique
+  p256dh        String
+  auth          String
+  userAgent     String?   @map("user_agent") @db.VarChar(255)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  lastSuccessAt DateTime? @map("last_success_at") @db.Timestamptz(3)
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_subscriptions")
+}
+
+model MoodEntry {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  level     Int      @db.SmallInt // 1..5 (CHECK)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("mood_entries")
+}
+
+model AuditLog {
+  // jejak aksi SuperAdmin (keamanan)
+  id           String   @id @default(uuid()) @db.Uuid
+  actorId      String?  @map("actor_id") @db.Uuid
+  targetUserId String?  @map("target_user_id") @db.Uuid
+  action       String   @db.VarChar(50) // USER_CREATE | USER_UPDATE | USER_DELETE | LOGIN_FAIL …
+  meta         Json?
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([createdAt])
+  @@map("audit_logs")
+}
