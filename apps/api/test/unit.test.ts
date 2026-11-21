@@ -9,6 +9,7 @@ import { toPublicUser } from '../src/lib/serializers.js';
 import { taskInputToDbFields, taskToPseudoInput } from '../src/lib/taskInput.js';
 import { toDomainTask } from '../src/lib/reminderService.js';
 import { needsRehash } from '../src/lib/password.js';
+import { AppError, parseUuid } from '../src/lib/errors.js';
 
 const TZ = 'Asia/Jakarta';
 const NOW = DateTime.fromObject({ year: 2026, month: 10, day: 5, hour: 8 }, { zone: TZ }).toMillis();
@@ -209,5 +210,12 @@ describe('jwt, serializer, dan rehash', () => {
     const weak = await hash('password123', { type: argon2id, memoryCost: 1024, timeCost: 2, parallelism: 1 });
     expect(needsRehash(weak)).toBe(true);
     expect(needsRehash('bukan-hash')).toBe(true);
+  });
+
+  it('parseUuid menerima UUID valid dan melempar 400 VALIDATION_ERROR untuk input tidak valid', () => {
+    const valid = '550e8400-e29b-41d4-a716-446655440000';
+    expect(parseUuid(valid)).toBe(valid);
+    expect(() => parseUuid("1' OR '1'='1")).toThrow(AppError);
+    expect(() => parseUuid('bukan-uuid', 'reassignTo')).toThrow(AppError);
   });
 });

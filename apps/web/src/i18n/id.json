@@ -6,6 +6,16 @@
     "actions": "Aksi",
     "add": "Tambah User",
     "addTitle": "Tambah User Baru",
+    "audit": {
+      "action": "Aksi",
+      "actor": "Aktor",
+      "allActions": "Semua aksi",
+      "empty": "Belum ada catatan audit",
+      "filterAction": "Filter jenis aksi",
+      "target": "Target",
+      "time": "Waktu",
+      "title": "Log Audit Keamanan"
+    },
     "cannotDeleteSelf": "Anda tidak dapat menghapus akun sendiri",
     "createdAt": "Tanggal Registrasi",
     "delete": {
@@ -46,8 +56,10 @@
     "errors": {
       "emailInvalid": "Format email tidak valid",
       "emailTaken": "Email sudah terdaftar",
+      "nameInvalid": "Nama hanya boleh berisi huruf dan pemisah nama yang wajar",
       "passwordMin": "Password minimal 8 karakter",
-      "passwordMismatch": "Konfirmasi password tidak sama"
+      "passwordMismatch": "Konfirmasi password tidak sama",
+      "passwordWeak": "Password harus berisi huruf besar, huruf kecil, angka, tanpa spasi"
     },
     "hidePassword": "Sembunyikan password",
     "login": {
@@ -67,6 +79,8 @@
       "confirmPassword": "Konfirmasi Password",
       "hasAccount": "Sudah punya akun?",
       "loginLink": "Masuk di sini",
+      "nameHint": "Huruf dan pemisah nama (spasi, titik, apostrof, atau tanda hubung).",
+      "passwordHint": "Minimal 8 karakter, huruf besar, huruf kecil, angka, tanpa spasi.",
       "passwordPlaceholder": "Minimal 8 karakter",
       "rateLimited": "Terlalu banyak percobaan. Coba lagi dalam {{minutes}} menit.",
       "strength": {

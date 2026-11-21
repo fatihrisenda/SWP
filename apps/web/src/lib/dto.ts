@@ -1,4 +1,4 @@
-/** Tipe DTO respons API (kontrak Bagian 6 issues.md). Server menyimpan tipe ini di apps/api;
+/** Tipe DTO respons API. Server menyimpan tipe ini di apps/api;
  * `@swp/shared` tidak mengekspor DTO respons, jadi dideklarasikan lokal di web. */
 import type { CategoryType, PriorityLabel, Role, TaskStatus, TaskType } from '@swp/shared';
 
@@ -148,4 +148,18 @@ export interface AdminUserDto {
   email: string;
   role: Role;
   createdAt: string;
+}
+
+export interface AuditLogDto {
+  id: string;
+  actorId: string | null;
+  targetUserId: string | null;
+  action: string;
+  meta: Record<string, unknown> | null;
+  createdAt: string;
+}
+
+export interface AuditLogListDto {
+  items: AuditLogDto[];
+  total: number;
 }

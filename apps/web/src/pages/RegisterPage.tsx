@@ -7,7 +7,7 @@ import { ApiError, apiFetch, isNetworkError } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import type { UserDto } from '../lib/dto';
 import { useDocumentTitle } from '../lib/hooks';
-import { messageForField, serverFieldErrors, zodFieldErrors, type FieldErrors } from '../lib/validation';
+import { firstErrorPath, messageForField, serverFieldErrors, zodFieldErrors, type FieldErrors } from '../lib/validation';
 import { useToast } from '../components/Toast';
 import { Button } from '../components/ui/Button';
 import { Field } from '../components/ui/Field';
@@ -36,8 +36,16 @@ export function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirm] = useState('');
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitted, setSubmitted] = useState(false);
   const [banner, setBanner] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
+
+  const FIELD_IDS: Record<string, string> = {
+    name: 'register-name',
+    email: 'register-email',
+    password: 'register-password',
+    confirmPassword: 'register-confirm',
+  };
 
   const detectTimezone = (): string => {
     try {
@@ -47,18 +55,32 @@ export function RegisterPage() {
     }
   };
 
-  const validate = (): boolean => {
-    const parsed = registerSchema.safeParse({ name, email, password, confirmPassword });
-    if (!parsed.success) {
-      setErrors(zodFieldErrors(parsed.error.issues));
-      return false;
+  const validateFields = (next: { name: string; email: string; password: string; confirmPassword: string }, only?: string): boolean => {
+    const parsed = registerSchema.safeParse(next);
+    const allErrors = parsed.success ? {} : zodFieldErrors(parsed.error.issues);
+    if (only) {
+      setErrors((prev) => {
+        const updated = { ...prev };
+        const fieldsToSync = only === 'password' && next.confirmPassword ? ['password', 'confirmPassword'] : [only];
+        for (const f of fieldsToSync) {
+          if (allErrors[f]) updated[f] = allErrors[f];
+          else delete updated[f];
+        }
+        return updated;
+      });
+      return !allErrors[only];
     }
-    setErrors({});
-    return true;
+    setErrors(allErrors);
+    if (!parsed.success) {
+      const first = firstErrorPath(allErrors);
+      if (first && FIELD_IDS[first]) document.getElementById(FIELD_IDS[first])?.focus();
+    }
+    return parsed.success;
   };
 
   const submit = async () => {
-    if (busy || !validate()) return;
+    setSubmitted(true);
+    if (busy || !validateFields({ name, email, password, confirmPassword })) return;
     setBusy(true);
     setBanner(undefined);
     try {
@@ -108,7 +130,13 @@ export function RegisterPage() {
             </p>
           ) : null}
 
-          <Field label={t('auth.name')} htmlFor="register-name" required error={messageForField(errors, 'name', t)}>
+          <Field
+            label={t('auth.name')}
+            htmlFor="register-name"
+            required
+            hint={t('auth.register.nameHint')}
+            error={messageForField(errors, 'name', t)}
+          >
             {({ id, invalid, describedBy }) => (
               <Input
                 id={id}
@@ -116,8 +144,14 @@ export function RegisterPage() {
                 aria-describedby={describedBy}
                 aria-invalid={invalid || undefined}
                 value={name}
-                onChange={(event) => setName(event.target.value)}
-                onBlur={validate}
+                onChange={(event) => {
+                  const v = event.target.value;
+                  setName(v);
+                  if (submitted || errors.name) validateFields({ name: v, email, password, confirmPassword }, 'name');
+                }}
+                onBlur={() => {
+                  if (submitted || name.trim().length > 0) validateFields({ name, email, password, confirmPassword }, 'name');
+                }}
               />
             )}
           </Field>
@@ -133,8 +167,14 @@ export function RegisterPage() {
                 aria-describedby={describedBy}
                 aria-invalid={invalid || undefined}
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                onBlur={validate}
+                onChange={(event) => {
+                  const v = event.target.value;
+                  setEmail(v);
+                  if (submitted || errors.email) validateFields({ name, email: v, password, confirmPassword }, 'email');
+                }}
+                onBlur={() => {
+                  if (submitted || email.trim().length > 0) validateFields({ name, email, password, confirmPassword }, 'email');
+                }}
               />
             )}
           </Field>
@@ -144,7 +184,7 @@ export function RegisterPage() {
             htmlFor="register-password"
             required
             error={messageForField(errors, 'password', t)}
-            hint={t('auth.register.passwordPlaceholder')}
+            hint={t('auth.register.passwordHint')}
             labelAccessory={
               password ? (
                 <span className="text-badge font-semibold text-muted">{t(`auth.register.strength.${strength}`)}</span>
@@ -159,8 +199,16 @@ export function RegisterPage() {
                 aria-describedby={describedBy}
                 aria-invalid={invalid || undefined}
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                onBlur={validate}
+                onChange={(event) => {
+                  const v = event.target.value;
+                  setPassword(v);
+                  if (submitted || errors.password || v.length > 0) {
+                    validateFields({ name, email, password: v, confirmPassword }, 'password');
+                  }
+                }}
+                onBlur={() => {
+                  if (submitted || password.length > 0) validateFields({ name, email, password, confirmPassword }, 'password');
+                }}
               />
             )}
           </Field>
@@ -178,8 +226,18 @@ export function RegisterPage() {
                 aria-describedby={describedBy}
                 aria-invalid={invalid || undefined}
                 value={confirmPassword}
-                onChange={(event) => setConfirm(event.target.value)}
-                onBlur={validate}
+                onChange={(event) => {
+                  const v = event.target.value;
+                  setConfirm(v);
+                  if (submitted || errors.confirmPassword || v.length > 0) {
+                    validateFields({ name, email, password, confirmPassword: v }, 'confirmPassword');
+                  }
+                }}
+                onBlur={() => {
+                  if (submitted || confirmPassword.length > 0) {
+                    validateFields({ name, email, password, confirmPassword }, 'confirmPassword');
+                  }
+                }}
               />
             )}
           </Field>

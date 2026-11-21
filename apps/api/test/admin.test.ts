@@ -56,11 +56,28 @@ describe('admin: statistik & daftar pengguna (Issue 033, FR-11)', () => {
   it('mahasiswa tidak bisa membuka /admin/* (403) walau sesi valid', async () => {
     const mahasiswa = await makeUser(ctx);
     const cookie = ctx.cookie(await makeSession(ctx, mahasiswa.id));
-    for (const path of ['/api/v1/admin/stats', '/api/v1/admin/users']) {
+    for (const path of ['/api/v1/admin/stats', '/api/v1/admin/users', '/api/v1/admin/audit-logs']) {
       const res = await request(ctx.app).get(path).set('Cookie', cookie);
       expect(res.status, path).toBe(403);
       expect(res.body.error.code).toBe('FORBIDDEN');
     }
+  });
+
+  it('GET /admin/audit-logs mengembalikan daftar log dengan filter action dan total (UC-16)', async () => {
+    await request(ctx.app)
+      .post('/api/v1/admin/users')
+      .set('Cookie', adminCookie)
+      .send({ name: 'Audit Uji', email: 'audit.uji@test.local', password: PASSWORD, role: 'MAHASISWA' });
+
+    const all = await adminReq.get('/api/v1/admin/audit-logs');
+    expect(all.status).toBe(200);
+    expect(all.body.total).toBe(1);
+    expect(all.body.items[0]).toMatchObject({ action: 'USER_CREATE' });
+
+    const filtered = await adminReq.get('/api/v1/admin/audit-logs?action=USER_DELETE');
+    expect(filtered.status).toBe(200);
+    expect(filtered.body.items).toHaveLength(0);
+    expect(filtered.body.total).toBe(0);
   });
 });
 

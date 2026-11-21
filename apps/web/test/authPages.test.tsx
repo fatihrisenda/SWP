@@ -107,4 +107,18 @@ describe('RegisterPage', () => {
     expect(passwordStrength('Abcdefgh')).toBe(2);
     expect(passwordStrength('Abcdefgh1')).toBe(3);
   });
+
+  it('menolak nama dengan angka dan password tanpa huruf besar/angka', async () => {
+    const { user } = renderWithProviders(<RegisterPage />, { route: '/register' });
+    await user.type(screen.getByLabelText(NAME), 'Budi123');
+    await user.type(screen.getByLabelText(EMAIL), 'andi@gmail');
+    await user.type(screen.getByLabelText(PASSWORD), 'password');
+    await user.type(screen.getByLabelText(CONFIRM), 'Beda123');
+    await user.click(screen.getByRole('button', { name: 'Daftar' }));
+
+    expect(await screen.findByText('Nama hanya boleh berisi huruf dan pemisah nama yang wajar')).toBeInTheDocument();
+    expect(await screen.findByText('Format email tidak valid')).toBeInTheDocument();
+    expect(await screen.findByText('Password harus berisi huruf besar, huruf kecil, angka, tanpa spasi')).toBeInTheDocument();
+    expect(await screen.findByText('Konfirmasi password tidak sama')).toBeInTheDocument();
+  });
 });

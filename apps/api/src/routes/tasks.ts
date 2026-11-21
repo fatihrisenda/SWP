@@ -13,7 +13,7 @@ import {
   type DomainTask,
 } from '@swp/shared';
 import { prisma } from '../lib/prisma.js';
-import { notFound } from '../lib/errors.js';
+import { AppError, notFound, parseUuid } from '../lib/errors.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { findCategoryOwnedByUser } from '../repositories/categoryRepo.js';
 import { syncReminder, toDomainTask } from '../lib/reminderService.js';
@@ -245,7 +245,7 @@ function taskInputCandidateToDomain(input: ReturnType<typeof taskInputSchema.par
 // ---------------------------------------------------------------------------
 tasksRouter.get('/tasks/:id', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   const task = await prisma.task.findFirst({ where: { id, userId }, include: { category: true } });
   if (!task) throw notFound('Tugas tidak ditemukan');
 
@@ -258,7 +258,10 @@ tasksRouter.get('/tasks/:id', async (req, res) => {
 // ---------------------------------------------------------------------------
 tasksRouter.patch('/tasks/:id', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    throw new AppError('VALIDATION_ERROR', 400, 'Data tidak valid');
+  }
   const existing = await prisma.task.findFirst({ where: { id, userId } });
   if (!existing) throw notFound('Tugas tidak ditemukan');
 
@@ -300,7 +303,7 @@ tasksRouter.patch('/tasks/:id', async (req, res) => {
 // ---------------------------------------------------------------------------
 tasksRouter.patch('/tasks/:id/status', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   const { status } = taskStatusSchema.parse(req.body);
 
   const existing = await prisma.task.findFirst({ where: { id, userId } });
@@ -325,7 +328,7 @@ tasksRouter.patch('/tasks/:id/status', async (req, res) => {
 // ---------------------------------------------------------------------------
 tasksRouter.delete('/tasks/:id', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   const existing = await prisma.task.findFirst({ where: { id, userId } });
   if (!existing) throw notFound('Tugas tidak ditemukan');
 

@@ -1,9 +1,15 @@
 import { Router } from 'express';
 import { randomUUID } from 'node:crypto';
 import { Prisma } from '@prisma/client';
-import { adminCreateUserSchema, adminListUsersQuerySchema, adminUpdateUserSchema } from '@swp/shared';
+import {
+  adminAuditLogsQuerySchema,
+  adminCreateUserSchema,
+  adminListUsersQuerySchema,
+  adminUpdateUserSchema,
+} from '@swp/shared';
 import { prisma } from '../lib/prisma.js';
-import { AppError, notFound } from '../lib/errors.js';
+import { AppError, notFound, parseUuid } from '../lib/errors.js';
+import { escapeLikePattern } from '../lib/dateRange.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { hashPassword } from '../lib/password.js';
 import { createDefaultCategories } from '../repositories/categoryRepo.js';
@@ -21,11 +27,39 @@ adminRouter.get('/admin/stats', async (_req, res) => {
   res.status(200).json({ totalUsers, totalMahasiswa, totalSuperAdmin });
 });
 
+/** UC-16 / FR-16: Tinjau Log Audit Keamanan (filter aksi & paginasi). */
+adminRouter.get('/admin/audit-logs', async (req, res) => {
+  const { action, limit, offset } = adminAuditLogsQuerySchema.parse(req.query);
+  const where: Prisma.AuditLogWhereInput = action ? { action } : {};
+
+  const [logs, total] = await Promise.all([
+    prisma.auditLog.findMany({ where, orderBy: { createdAt: 'desc' }, take: limit, skip: offset }),
+    prisma.auditLog.count({ where }),
+  ]);
+
+  res.status(200).json({
+    items: logs.map((log) => ({
+      id: log.id,
+      actorId: log.actorId,
+      targetUserId: log.targetUserId,
+      action: log.action,
+      meta: log.meta,
+      createdAt: log.createdAt.toISOString(),
+    })),
+    total,
+  });
+});
+
 adminRouter.get('/admin/users', async (req, res) => {
   const { limit, offset, q } = adminListUsersQuerySchema.parse(req.query);
 
   const where: Prisma.UserWhereInput = q
-    ? { OR: [{ name: { contains: q, mode: 'insensitive' } }, { email: { contains: q, mode: 'insensitive' } }] }
+    ? {
+        OR: [
+          { name: { contains: escapeLikePattern(q), mode: 'insensitive' } },
+          { email: { contains: escapeLikePattern(q), mode: 'insensitive' } },
+        ],
+      }
     : {};
 
   const users = await prisma.user.findMany({
@@ -71,7 +105,7 @@ adminRouter.post('/admin/users', async (req, res) => {
 });
 
 adminRouter.patch('/admin/users/:id', async (req, res) => {
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   const input = adminUpdateUserSchema.parse(req.body);
 
   try {
@@ -121,7 +155,7 @@ adminRouter.patch('/admin/users/:id', async (req, res) => {
 });
 
 adminRouter.delete('/admin/users/:id', async (req, res) => {
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   if (id === req.user!.id) {
     throw new AppError('FORBIDDEN', 403, 'Tidak bisa menghapus akun sendiri');
   }

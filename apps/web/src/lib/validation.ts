@@ -10,7 +10,9 @@ type Issue = Pick<ZodIssue, 'path' | 'code' | 'message'>;
 
 const CODE_KEYS: Record<string, string> = {
   required: 'form.errors.required',
+  invalid_name: 'auth.errors.nameInvalid',
   invalid_email: 'auth.errors.emailInvalid',
+  weak_password: 'auth.errors.passwordWeak',
   invalid_datetime: 'form.errors.invalidDate',
   invalid_time: 'form.errors.invalidTime',
   invalid_date: 'form.errors.invalidDate',

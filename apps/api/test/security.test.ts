@@ -168,13 +168,14 @@ describe('throttling login/register (Issue 014)', () => {
 
   it('register lebih dari 5/jam dari IP yang sama → 429', async () => {
     const from = nextIp();
+    const names = ['Mahasiswa Satu', 'Mahasiswa Dua', 'Mahasiswa Tiga', 'Mahasiswa Empat', 'Mahasiswa Lima', 'Mahasiswa Enam'];
     const results = [];
     for (let i = 0; i < 6; i++) {
       results.push(
         await request(ctx.app)
           .post('/api/v1/auth/register')
           .set('X-Forwarded-For', from)
-          .send({ name: `Mahasiswa ${i}`, email: `throttle${i}@test.local`, password: PASSWORD, confirmPassword: PASSWORD }),
+          .send({ name: names[i], email: `throttle${i}@test.local`, password: PASSWORD, confirmPassword: PASSWORD }),
       );
     }
     expect(results.slice(0, 5).every((r) => r.status === 201)).toBe(true);

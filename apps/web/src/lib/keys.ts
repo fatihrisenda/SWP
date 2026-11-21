@@ -15,6 +15,7 @@ export const qk = {
   pushKey: ['push', 'public-key'] as const,
   adminStats: ['admin', 'stats'] as const,
   adminUsers: (q: string, offset: number) => ['admin', 'users', q, offset] as const,
+  adminAuditLogs: (action: string, offset: number) => ['admin', 'audit-logs', action, offset] as const,
 };
 
 /** Setelah mutasi tugas/kategori/mood: refresh dashboard + daftar + rekomendasi (FR-02.5, FR-07.6). */

@@ -6,6 +6,16 @@
     "actions": "Actions",
     "add": "Add User",
     "addTitle": "Add New User",
+    "audit": {
+      "action": "Action",
+      "actor": "Actor",
+      "allActions": "All actions",
+      "empty": "No audit logs yet",
+      "filterAction": "Filter by action",
+      "target": "Target",
+      "time": "Timestamp",
+      "title": "Security Audit Log"
+    },
     "cannotDeleteSelf": "You cannot delete your own account",
     "createdAt": "Registration Date",
     "delete": {
@@ -46,8 +56,10 @@
     "errors": {
       "emailInvalid": "Invalid email format",
       "emailTaken": "This email is already registered",
+      "nameInvalid": "Name may only contain letters and standard name separators",
       "passwordMin": "Password must be at least 8 characters",
-      "passwordMismatch": "Password confirmation does not match"
+      "passwordMismatch": "Password confirmation does not match",
+      "passwordWeak": "Password must include uppercase, lowercase, a number, and no spaces"
     },
     "hidePassword": "Hide password",
     "login": {
@@ -67,6 +79,8 @@
       "confirmPassword": "Confirm Password",
       "hasAccount": "Already have an account?",
       "loginLink": "Sign in here",
+      "nameHint": "Letters and standard separators (space, period, apostrophe, or hyphen).",
+      "passwordHint": "At least 8 characters with uppercase, lowercase, a number, and no spaces.",
       "passwordPlaceholder": "At least 8 characters",
       "rateLimited": "Too many attempts. Try again in {{minutes}} minutes.",
       "strength": {

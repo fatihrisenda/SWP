@@ -7,7 +7,7 @@ import { useConfirm } from '../lib/confirm';
 import { ApiError } from '../lib/api';
 import { useDebouncedValue } from '../lib/hooks';
 import { fmtDateTime } from '../lib/format';
-import { useAdminStats, useAdminUsers } from '../lib/queries';
+import { useAdminAuditLogs, useAdminStats, useAdminUsers } from '../lib/queries';
 import { useAdminCreateUser, useAdminDeleteUser, useAdminUpdateUser } from '../lib/mutations';
 import type { AdminUserDto } from '../lib/dto';
 import { ErrorBlock, LoadingBlock, PageHeader } from '../components/AppLayout';
@@ -16,6 +16,7 @@ import { useToast } from '../components/Toast';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
+import { Select } from '../components/ui/Select';
 import { StatCard } from '../components/ui/StatCard';
 
 const PAGE_SIZE = 50;
@@ -28,11 +29,13 @@ export function AdminPage() {
 
   const [search, setSearch] = useState('');
   const [offset, setOffset] = useState(0);
+  const [auditAction, setAuditAction] = useState('');
   const [modal, setModal] = useState<{ mode: 'create' } | { mode: 'edit'; target: AdminUserDto } | null>(null);
 
   const query = useDebouncedValue(search, 300);
   const stats = useAdminStats();
   const list = useAdminUsers(query, offset);
+  const auditLogs = useAdminAuditLogs(auditAction, 0);
   const createUser = useAdminCreateUser();
   const updateUser = useAdminUpdateUser();
   const deleteUser = useAdminDeleteUser();
@@ -220,6 +223,56 @@ export function AdminPage() {
           ) : null}
         </>
       )}
+
+      <Card as="section" ariaLabel={t('admin.audit.title')} className="flex flex-col gap-3 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-h2 font-bold">{t('admin.audit.title')}</h2>
+          <Select
+            aria-label={t('admin.audit.filterAction')}
+            value={auditAction}
+            onChange={(event) => setAuditAction(event.target.value)}
+            className="w-auto"
+          >
+            <option value="">{t('admin.audit.allActions')}</option>
+            <option value="USER_CREATE">USER_CREATE</option>
+            <option value="USER_UPDATE">USER_UPDATE</option>
+            <option value="USER_DELETE">USER_DELETE</option>
+            <option value="LOGIN_FAIL">LOGIN_FAIL</option>
+          </Select>
+        </div>
+        {auditLogs.isLoading ? (
+          <LoadingBlock />
+        ) : auditLogs.isError ? (
+          <ErrorBlock onRetry={() => void auditLogs.refetch()} />
+        ) : (auditLogs.data?.items.length ?? 0) === 0 ? (
+          <p className="text-label text-muted">{t('admin.audit.empty')}</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-left text-label">
+              <thead>
+                <tr className="border-b border-line text-badge uppercase tracking-wide text-muted">
+                  <th scope="col">{t('admin.audit.time')}</th>
+                  <th scope="col">{t('admin.audit.action')}</th>
+                  <th scope="col">{t('admin.audit.actor')}</th>
+                  <th scope="col">{t('admin.audit.target')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {auditLogs.data!.items.map((log) => (
+                  <tr key={log.id} className="border-b border-line last:border-0">
+                    <td className="py-2 pr-2 text-muted">{fmtDateTime(log.createdAt, user?.timezone ?? 'Asia/Jakarta', i18n.language)}</td>
+                    <td className="py-2 pr-2">
+                      <span className="badge bg-bg text-ink">{log.action}</span>
+                    </td>
+                    <td className="py-2 pr-2 font-mono text-badge text-muted">{log.actorId ? log.actorId.slice(0, 8) : '-'}</td>
+                    <td className="py-2 font-mono text-badge text-muted">{log.targetUserId ? log.targetUserId.slice(0, 8) : '-'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </Card>
 
       {modal ? <AdminUserModal initial={modal.mode === 'edit' ? modal.target : undefined} onClose={() => setModal(null)} onSubmit={submit} /> : null}
     </div>

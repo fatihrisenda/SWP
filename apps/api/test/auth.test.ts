@@ -66,6 +66,14 @@ describe('auth: register (Issue 010)', () => {
     const badEmail = await register({ name: 'Caca', email: 'bukan-email', password: PASSWORD, confirmPassword: PASSWORD });
     expect(badEmail.status).toBe(400);
     expect(badEmail.body.error.code).toBe('VALIDATION_ERROR');
+
+    const badName = await register({ name: 'Budi123', email: 'budi@example.com', password: PASSWORD, confirmPassword: PASSWORD });
+    expect(badName.status).toBe(400);
+    expect(badName.body.error.fields).toMatchObject({ name: 'invalid_name' });
+
+    const weakPassword = await register({ name: 'Siti Nur Aisyah', email: 'siti@example.com', password: 'password', confirmPassword: 'password' });
+    expect(weakPassword.status).toBe(400);
+    expect(weakPassword.body.error.fields).toMatchObject({ password: 'weak_password' });
   });
 
   it('key `role` dari klien ditolak (.strict) dan tidak pernah menghasilkan SuperAdmin', async () => {

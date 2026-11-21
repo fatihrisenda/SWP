@@ -1,15 +1,39 @@
 import { z } from 'zod';
 import { LIMITS } from '../constants.js';
 
-const email = z.string().trim().toLowerCase().max(LIMITS.email.max).email('invalid_email');
-const password = z.string().min(LIMITS.password.min).max(LIMITS.password.max);
-const name = z.string().trim().min(LIMITS.userName.min).max(LIMITS.userName.max);
+/** Pola Regex untuk validasi format nama, email, dan password. */
+export const USER_PATTERNS = {
+  name: /^[\p{L}]+(?:[ .'-][\p{L}]+)*$/u,
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{8,}$/,
+} as const;
+
+export const userNameSchema = z
+  .string()
+  .trim()
+  .min(LIMITS.userName.min)
+  .max(LIMITS.userName.max)
+  .regex(USER_PATTERNS.name, 'invalid_name');
+
+export const userEmailSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .max(LIMITS.email.max)
+  .regex(USER_PATTERNS.email, 'invalid_email')
+  .email('invalid_email');
+
+export const userPasswordSchema = z
+  .string()
+  .min(LIMITS.password.min)
+  .max(LIMITS.password.max)
+  .regex(USER_PATTERNS.password, 'weak_password');
 
 export const registerSchema = z
   .object({
-    name,
-    email,
-    password,
+    name: userNameSchema,
+    email: userEmailSchema,
+    password: userPasswordSchema,
     confirmPassword: z.string(),
     timezone: z.string().optional(),
   })
@@ -20,7 +44,7 @@ export type RegisterInput = z.infer<typeof registerSchema>;
 
 export const loginSchema = z
   .object({
-    email,
+    email: userEmailSchema,
     password: z.string().min(1, 'required'),
     remember: z.boolean().optional().default(false),
   })

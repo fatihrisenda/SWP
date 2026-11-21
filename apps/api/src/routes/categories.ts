@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { Prisma } from '@prisma/client';
 import { categoryInputSchema, LIMITS } from '@swp/shared';
 import { prisma } from '../lib/prisma.js';
-import { AppError, notFound } from '../lib/errors.js';
+import { AppError, notFound, parseUuid } from '../lib/errors.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { findCategoryOwnedByUser } from '../repositories/categoryRepo.js';
 
@@ -61,7 +61,7 @@ categoriesRouter.post('/categories', async (req, res) => {
 
 categoriesRouter.patch('/categories/:id', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
+  const id = parseUuid(req.params.id);
   const input = categoryInputSchema.partial().parse(req.body);
 
   const existing = await findCategoryOwnedByUser(prisma, userId, id);
@@ -93,8 +93,8 @@ categoriesRouter.patch('/categories/:id', async (req, res) => {
 
 categoriesRouter.delete('/categories/:id', async (req, res) => {
   const userId = req.user!.id;
-  const id = req.params.id as string;
-  const reassignTo = typeof req.query.reassignTo === 'string' ? req.query.reassignTo : undefined;
+  const id = parseUuid(req.params.id);
+  const reassignTo = typeof req.query.reassignTo === 'string' ? parseUuid(req.query.reassignTo, 'reassignTo') : undefined;
 
   const existing = await findCategoryOwnedByUser(prisma, userId, id);
   if (!existing) throw notFound('Kategori tidak ditemukan');

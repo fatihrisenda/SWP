@@ -25,3 +25,5 @@ pgdata/
 dev-dist/
 *.tsbuildinfo
 /apps/api/prisma/dev.db
+issues.md
+log.txt

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Bell, BellOff, LogOut, RefreshCw, Save, ShieldCheck } from 'lucide-react';
-import { LIMITS } from '@swp/shared';
+import { LIMITS, updateMeSchema } from '@swp/shared';
 import { LanguageSwitcher, PageHeader } from '../components/AppLayout';
 import { InstallButton } from '../components/InstallPrompt';
 import { useToast } from '../components/Toast';
@@ -16,6 +16,7 @@ import { ApiError } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { useConfirm } from '../lib/confirm';
 import { useUpdateMe } from '../lib/mutations';
+import { messageForField, zodFieldErrors } from '../lib/validation';
 import {
   currentEndpoint,
   disablePush,
@@ -103,18 +104,20 @@ function ProfileCard() {
     setNameError(undefined);
     setTimezoneError(undefined);
     setCapacityError(undefined);
-    const trimmed = name.trim();
-    if (trimmed.length < LIMITS.userName.min || trimmed.length > LIMITS.userName.max) {
-      setNameError(t('settings.errors.name'));
-      return;
-    }
     const hours = Number(capacity);
-    if (!Number.isFinite(hours) || hours < 1 || hours > 24) {
-      setCapacityError(t('settings.errors.capacity'));
+    const parsed = updateMeSchema.safeParse({
+      name: name.trim(),
+      timezone,
+      dailyCapacityHours: Number.isFinite(hours) ? hours : -1,
+    });
+    if (!parsed.success) {
+      const errs = zodFieldErrors(parsed.error.issues);
+      if (errs.name) setNameError(errs.name === 'auth.errors.nameInvalid' ? messageForField(errs, 'name', t) : t('settings.errors.name'));
+      if (errs.dailyCapacityHours) setCapacityError(t('settings.errors.capacity'));
       return;
     }
     try {
-      await updateMe.mutateAsync({ name: trimmed, timezone, dailyCapacityHours: hours });
+      await updateMe.mutateAsync({ name: parsed.data.name!, timezone, dailyCapacityHours: hours });
       toast.success(t('settings.saved'));
     } catch (error) {
       if (error instanceof ApiError && error.code === 'VALIDATION_ERROR') {

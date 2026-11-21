@@ -129,4 +129,5 @@ export const handlers = [
     HttpResponse.json({ totalUsers: 2, totalMahasiswa: 1, totalSuperAdmin: 1 }),
   ),
   http.get(`${API_BASE}/admin/users`, () => HttpResponse.json([makeAdminUser()])),
+  http.get(`${API_BASE}/admin/audit-logs`, () => HttpResponse.json({ items: [], total: 0 })),
 ];

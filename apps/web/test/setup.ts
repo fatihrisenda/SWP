@@ -39,3 +39,21 @@ afterAll(() => {
 });
 
 initI18n('id');
+
+// Kompatibilitas Node v25+: stub localStorage bawaan Node tidak menyediakan .clear() tanpa --localstorage-file.
+if (typeof window !== 'undefined' && typeof window.localStorage?.clear !== 'function') {
+  const store = new Map<string, string>();
+  Object.defineProperty(window, 'localStorage', {
+    configurable: true,
+    value: {
+      get length() {
+        return store.size;
+      },
+      clear: () => store.clear(),
+      getItem: (k: string) => store.get(k) ?? null,
+      key: (i: number) => Array.from(store.keys())[i] ?? null,
+      removeItem: (k: string) => store.delete(k),
+      setItem: (k: string, v: string) => store.set(k, String(v)),
+    },
+  });
+}

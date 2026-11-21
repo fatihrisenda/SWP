@@ -5,6 +5,7 @@ import type {
   AdminStatsDto,
   AdminUserDto,
   AnalyticsDto,
+  AuditLogListDto,
   CategoryDto,
   DashboardDto,
   MoodDto,
@@ -114,6 +115,18 @@ export function useAdminUsers(q: string, offset: number, enabled = true) {
   return useQuery({
     queryKey: qk.adminUsers(q, offset),
     queryFn: () => apiFetch<AdminUserDto[]>('/admin/users', { query: { q: q || undefined, limit: 50, offset } }),
+    enabled,
+    placeholderData: (previous) => previous,
+  });
+}
+
+export function useAdminAuditLogs(action: string, offset: number, enabled = true) {
+  return useQuery({
+    queryKey: qk.adminAuditLogs(action, offset),
+    queryFn: () =>
+      apiFetch<AuditLogListDto>('/admin/audit-logs', {
+        query: { action: action || undefined, limit: 20, offset },
+      }),
     enabled,
     placeholderData: (previous) => previous,
   });
